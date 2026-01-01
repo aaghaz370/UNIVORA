@@ -12,19 +12,6 @@
     padding: 0 40px;
 }
 
-/* Section Title - Same style as EcosystemSection */
-.logoloop-title {
-    font-size: 3rem;
-    font-weight: 700;
-    text-align: center;
-    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #8b5cf6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0 0 60px 0;
-    text-shadow: 0 0 40px rgba(167, 139, 250, 0.3);
-}
-
 .logoloop-text {
     text-align: center;
     color: rgba(255, 255, 255, 0.5);
@@ -40,37 +27,30 @@
     align-items: center;
 }
 
-/* Make all logos WHITE */
-.logoloop-wrapper img {
-    filter: brightness(0) invert(1);
-    opacity: 0.85;
-    transition: all 0.3s ease;
-}
-
-.logoloop-wrapper img:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* Mobile CSS-only Animation */
-.logoloop-mobile {
+/* CSS-only Infinite Scroll */
+.logoloop-scroll {
     width: 100%;
     overflow: hidden;
     position: relative;
 }
 
-.logoloop-mobile-track {
+.logoloop-track {
     display: flex;
-    gap: 60px;
-    animation: logoScroll 30s linear infinite;
+    gap: 80px;
+    animation: logoScroll 40s linear infinite;
     will-change: transform;
 }
 
-.logoloop-mobile-logo {
-    height: 30px;
+.logoloop-logo {
+    height: 35px;
     flex-shrink: 0;
     filter: brightness(0) invert(1);
     opacity: 0.85;
+    transition: opacity 0.3s ease;
+}
+
+.logoloop-logo:hover {
+    opacity: 1;
 }
 
 @keyframes logoScroll {
@@ -93,13 +73,16 @@
         padding: 0 30px;
     }
 
-    .logoloop-title {
-        font-size: 2.5rem;
-        margin-bottom: 50px;
-    }
-
     .logoloop-wrapper {
         height: 80px;
+    }
+
+    .logoloop-track {
+        gap: 70px;
+    }
+
+    .logoloop-logo {
+        height: 32px;
     }
 }
 
@@ -112,20 +95,15 @@
         padding: 0 20px;
     }
 
-    .logoloop-title {
-        font-size: 2rem;
-        margin-bottom: 40px;
-    }
-
     .logoloop-wrapper {
         height: 70px;
     }
 
-    .logoloop-mobile-track {
+    .logoloop-track {
         gap: 50px;
     }
 
-    .logoloop-mobile-logo {
+    .logoloop-logo {
         height: 28px;
     }
 }
@@ -139,20 +117,16 @@
         padding: 0 16px;
     }
 
-    .logoloop-title {
-        font-size: 1.75rem;
-        margin-bottom: 30px;
-    }
-
     .logoloop-wrapper {
         height: 60px;
     }
 
-    .logoloop-mobile-track {
+    .logoloop-track {
         gap: 40px;
+        animation-duration: 25s;
     }
 
-    .logoloop-mobile-logo {
+    .logoloop-logo {
         height: 25px;
     }
 }
