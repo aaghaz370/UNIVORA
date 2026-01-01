@@ -28,21 +28,21 @@ const platforms: Platform[] = [
         icon: <HiFilm />,
         color: '#E50914',
         description: 'Movies & Series',
-        url: 'https://cinemahub.univora.site'
+        url: 'https://cinemahub8.vercel.app'
     },
     {
         name: 'Groovia',
         icon: <HiMusicalNote />,
         color: '#1DB954',
         description: 'Music Streaming',
-        url: 'https://groovia.univora.site'
+        url: 'https://groovia8.vercel.app'
     },
     {
         name: 'Bookora',
         icon: <HiBookOpen />,
         color: '#FF6B35',
         description: 'Digital Library',
-        url: 'https://bookora.univora.site'
+        url: 'https://notora8.netlify.app'
     },
     {
         name: 'Skillora',
@@ -52,7 +52,7 @@ const platforms: Platform[] = [
         url: 'https://skillora.univora.site'
     },
     {
-        name: 'Anipaca',
+        name: 'Fenime',
         icon: <HiTv />,
         color: '#EC4899',
         description: 'Anime Universe',
@@ -63,7 +63,7 @@ const platforms: Platform[] = [
         icon: <HiCpuChip />,
         color: '#10B981',
         description: 'Telegram Bots',
-        url: 'https://bots.univora.site'
+        url: '/bots'
     }
 ];
 
