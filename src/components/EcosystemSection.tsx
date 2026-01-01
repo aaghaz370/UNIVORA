@@ -49,9 +49,9 @@ const platforms: ChromaItem[] = [
     },
     {
         image: anipacaImg,
-        title: 'Anipaca',
+        title: 'Fenime',
         subtitle: 'Watch anime series and movies',
-        handle: 'Fenime',
+        handle: 'Anime',
         borderColor: '#FF8B94',
         gradient: 'linear-gradient(225deg, #FF8B94, #000)',
         url: '/coming'
