@@ -3,7 +3,7 @@ import Navigation from '../components/Navigation';
 import HeroBanner from '../components/HeroBanner';
 import EcosystemSection from '../components/EcosystemSection';
 import LogoLoopSection from '../components/LogoLoopSection';
-import FeatureHighlights from '../components/FeatureHighlights';
+// import FeatureHighlights from '../components/FeatureHighlights';
 import JourneySection from '../components/JourneySection';
 import FutureVisionSection from '../components/FutureVisionSection';
 import AboutSection from '../components/AboutSection';
@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
                 <EcosystemSection />
             </div>
             <LogoLoopSection />
-            <FeatureHighlights />
+            {/* <FeatureHighlights /> */}
             <div id="journey">
                 <JourneySection />
             </div>
