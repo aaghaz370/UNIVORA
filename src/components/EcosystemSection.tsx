@@ -2,9 +2,17 @@ import React from 'react';
 import ChromaGrid, { type ChromaItem } from './ChromaGrid';
 import './EcosystemSection.css';
 
+// Import Platform Logos
+import cinemahubImg from '../assets/logos/CINEMAHUB.jpg';
+import grooviaImg from '../assets/logos/GROOVIA.png';
+import notoraImg from '../assets/logos/NOTORA.jpg';
+import skilloraImg from '../assets/logos/SKILLORA.jpg';
+import anipacaImg from '../assets/logos/FENIME.jpg';
+import tgBotsImg from '../assets/logos/TELEGRAM_BOTS.jpg';
+
 const platforms: ChromaItem[] = [
     {
-        image: 'https://cdn.leonardo.ai/users/a0d5b0f6-64a8-42cb-99e3-59b98829a68d/generations/1f0e3d49-601f-6d10-94dd-7e2e02679d6c/gemini-image-2_Design_a_premium_modern_cinematic_logo_for_a_professional_movie_TV_streaming_pla-0.jpg',
+        image: cinemahubImg,
         title: 'CinemaHub',
         subtitle: 'Stream unlimited movies and TV shows',
         handle: 'Movies / TV',
@@ -13,25 +21,25 @@ const platforms: ChromaItem[] = [
         url: 'https://cinemahub8.vercel.app'
     },
     {
-        image: 'https://i.pravatar.cc/300?img=2',
+        image: grooviaImg,
         title: 'Groovia',
         subtitle: 'Discover and stream music worldwide',
         handle: 'Music',
         borderColor: '#4ECDC4',
         gradient: 'linear-gradient(210deg, #4ECDC4, #000)',
-        url: 'https://groovia.example.com'
+        url: 'https://grooviavercelwebsite.vercel.app'
     },
     {
-        image: 'https://i.pravatar.cc/300?img=3',
+        image: notoraImg,
         title: 'Notora',
         subtitle: 'Read and explore digital books',
         handle: 'Books',
         borderColor: '#FFE66D',
         gradient: 'linear-gradient(165deg, #FFE66D, #000)',
-        url: 'https://notora.example.com'
+        url: 'https://notora8.netlify.app'
     },
     {
-        image: 'https://i.pravatar.cc/300?img=4',
+        image: skilloraImg,
         title: 'Skillora',
         subtitle: 'Learn with premium online courses',
         handle: 'Courses',
@@ -40,16 +48,16 @@ const platforms: ChromaItem[] = [
         url: 'https://skillora.example.com'
     },
     {
-        image: 'https://i.pravatar.cc/300?img=5',
+        image: anipacaImg,
         title: 'Anipaca',
         subtitle: 'Watch anime series and movies',
-        handle: 'Anime',
+        handle: 'Fenime',
         borderColor: '#FF8B94',
         gradient: 'linear-gradient(225deg, #FF8B94, #000)',
-        url: 'https://anipaca.example.com'
+        url: '/coming'
     },
     {
-        image: 'https://i.pravatar.cc/300?img=6',
+        image: tgBotsImg,
         title: 'TG Bots',
         subtitle: 'Automate tasks with Telegram bots',
         handle: 'Automation',
