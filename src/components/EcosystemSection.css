@@ -1,0 +1,102 @@
+.ecosystem-section {
+    padding: 80px 0;
+    background: #060010;
+    position: relative;
+    overflow: hidden;
+}
+
+.ecosystem-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* Section Header */
+.ecosystem-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.ecosystem-title {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0 0 16px 0;
+    text-shadow: 0 0 40px rgba(167, 139, 250, 0.3);
+}
+
+.ecosystem-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ChromaGrid Container */
+.chromagrid-wrapper {
+    position: relative;
+    min-height: 600px;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ecosystem-container {
+        padding: 0 30px;
+    }
+
+    .ecosystem-title {
+        font-size: 2.5rem;
+    }
+
+    .ecosystem-subtitle {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ecosystem-section {
+        padding: 60px 0;
+    }
+
+    .ecosystem-container {
+        padding: 0 20px;
+    }
+
+    .ecosystem-header {
+        margin-bottom: 40px;
+    }
+
+    .ecosystem-title {
+        font-size: 2rem;
+    }
+
+    .ecosystem-subtitle {
+        font-size: 1rem;
+    }
+
+    .chromagrid-wrapper {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .ecosystem-section {
+        padding: 40px 0;
+    }
+
+    .ecosystem-container {
+        padding: 0 16px;
+    }
+
+    .ecosystem-title {
+        font-size: 1.75rem;
+    }
+
+    .ecosystem-subtitle {
+        font-size: 0.95rem;
+    }
+}

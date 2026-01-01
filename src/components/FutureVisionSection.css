@@ -1,0 +1,264 @@
+/* Future Vision Section - High IQ Premium Design */
+.future-vision-section {
+    position: relative;
+    padding: 120px 0;
+    background: #060010;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Background Grid - subtle */
+.fv-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(139, 92, 246, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, 0.015) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.2;
+    z-index: 2;
+}
+
+/* Background Glow */
+.fv-bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Container */
+.fv-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    text-align: center;
+}
+
+/* Hero Section with Orb */
+.fv-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 80px;
+}
+
+/* Floating Orb */
+.fv-orb {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 6s ease-in-out infinite;
+}
+
+.fv-orb__inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.3) 0%, rgba(6, 0, 16, 0.95) 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 0 60px rgba(139, 92, 246, 0.3),
+        inset 0 0 40px rgba(139, 92, 246, 0.1);
+}
+
+.fv-orb__text {
+    font-size: 4rem;
+    font-weight: 300;
+    color: #8B5CF6;
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.8);
+}
+
+/* Main Statement */
+.fv-statement {
+    max-width: 800px;
+}
+
+.fv-badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #8B5CF6;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    padding: 10px 25px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+}
+
+.fv-title {
+    margin: 0;
+    line-height: 1.3;
+}
+
+.fv-title__line {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+.fv-title__highlight {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 50%, #06B6D4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Features Grid */
+.fv-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+}
+
+.fv-feature-card {
+    background: rgba(10, 5, 20, 0.8);
+}
+
+.fv-feature {
+    padding: 35px 25px;
+    text-align: center;
+}
+
+.fv-feature__icon {
+    font-size: 2.5rem;
+    color: #8B5CF6;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.6));
+}
+
+.fv-feature__title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 12px 0;
+}
+
+.fv-feature__description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tagline */
+.fv-tagline {
+    margin-top: 40px;
+}
+
+.fv-tagline__text {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.fv-tagline__glow {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+/* Animations */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .fv-features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .fv-title__line {
+        font-size: 2rem;
+    }
+
+    .fv-title__highlight {
+        font-size: 2.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .future-vision-section {
+        padding: 80px 0;
+    }
+
+    .fv-container {
+        padding: 0 20px;
+    }
+
+    .fv-orb {
+        width: 120px;
+        height: 120px;
+    }
+
+    .fv-orb__text {
+        font-size: 3rem;
+    }
+
+    .fv-title__line {
+        font-size: 1.5rem;
+    }
+
+    .fv-title__highlight {
+        font-size: 2rem;
+    }
+
+    .fv-features {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .fv-tagline__text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fv-hero {
+        gap: 30px;
+        margin-bottom: 50px;
+    }
+
+    .fv-title__line {
+        font-size: 1.25rem;
+    }
+
+    .fv-title__highlight {
+        font-size: 1.75rem;
+    }
+
+    .fv-feature {
+        padding: 25px 20px;
+    }
+}
