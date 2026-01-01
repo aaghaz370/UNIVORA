@@ -40,7 +40,8 @@ export interface LogoLoopProps {
 const ANIMATION_CONFIG = {
     SMOOTH_TAU: 0.25,
     MIN_COPIES: 2,
-    COPY_HEADROOM: 2
+    COPY_HEADROOM: 2,
+    MAX_COPIES: 12 // Safety limit for mobile
 } as const;
 
 const toCssLength = (value?: number | string): string | undefined =>
@@ -259,18 +260,18 @@ export const LogoLoop = React.memo<LogoLoopProps>(
                         containerRef.current.style.height = `${targetHeight}px`;
                     }
                 }
-                if (sequenceHeight > 0) {
+                if (sequenceHeight > 10) { // Min height check
                     setSeqHeight(prev => (prev !== Math.ceil(sequenceHeight) ? Math.ceil(sequenceHeight) : prev));
-                    const viewport = containerRef.current.clientHeight || parentHeight || sequenceHeight;
+                    const viewport = containerRef.current?.clientHeight || parentHeight || sequenceHeight;
                     const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-                    setCopyCount(prev => Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+                    setCopyCount(prev => Math.min(ANIMATION_CONFIG.MAX_COPIES, Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded)));
                 }
             } else {
                 // Horizontal
-                if (sequenceWidth > 0) {
+                if (sequenceWidth > 10) { // Min width check
                     setSeqWidth(prev => (prev !== Math.ceil(sequenceWidth) ? Math.ceil(sequenceWidth) : prev));
                     const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-                    setCopyCount(prev => Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+                    setCopyCount(prev => Math.min(ANIMATION_CONFIG.MAX_COPIES, Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded)));
                 }
             }
         }, [isVertical]);
