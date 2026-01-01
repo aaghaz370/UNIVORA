@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MagicBento from './MagicBento';
 import './FeatureHighlights.css';
 
 const FeatureHighlights: React.FC = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <section className="features-section">
             <div className="features-container">
@@ -15,17 +26,17 @@ const FeatureHighlights: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Magic Bento Grid */}
+                {/* Magic Bento Grid - Lite version on mobile */}
                 <MagicBento
                     textAutoHide={true}
-                    enableStars={true}
-                    enableSpotlight={true}
+                    enableStars={!isMobile}
+                    enableSpotlight={!isMobile}
                     enableBorderGlow={true}
-                    enableTilt={true}
-                    enableMagnetism={true}
-                    clickEffect={true}
+                    enableTilt={false}
+                    enableMagnetism={false}
+                    clickEffect={false}
                     spotlightRadius={300}
-                    particleCount={12}
+                    particleCount={isMobile ? 0 : 8}
                     glowColor="132, 0, 255"
                 />
             </div>
