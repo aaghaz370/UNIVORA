@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ChromaGrid, { type ChromaItem } from './ChromaGrid';
 import './EcosystemSection.css';
 
@@ -68,6 +68,27 @@ const platforms: ChromaItem[] = [
 ];
 
 const EcosystemSection: React.FC = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const handleCardClick = (url?: string) => {
+        if (url) {
+            if (url.startsWith('/')) {
+                window.location.href = url;
+            } else {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        }
+    };
+
     return (
         <section className="ecosystem-section">
             <div className="ecosystem-container">
@@ -79,15 +100,40 @@ const EcosystemSection: React.FC = () => {
                     </p>
                 </div>
 
-                {/* ChromaGrid Wrapper */}
+                {/* Grid Wrapper */}
                 <div className="chromagrid-wrapper">
-                    <ChromaGrid
-                        items={platforms}
-                        radius={300}
-                        damping={0.45}
-                        fadeOut={0.6}
-                        ease="power3.out"
-                    />
+                    {isMobile ? (
+                        // Simple CSS Grid for mobile
+                        <div className="simple-grid">
+                            {platforms.map((platform, idx) => (
+                                <div
+                                    key={idx}
+                                    className="simple-card"
+                                    onClick={() => handleCardClick(platform.url)}
+                                    style={{
+                                        borderColor: platform.borderColor,
+                                        background: platform.gradient
+                                    }}
+                                >
+                                    <img src={platform.image} alt={platform.title} className="simple-card-image" />
+                                    <div className="simple-card-content">
+                                        <h3 className="simple-card-title">{platform.title}</h3>
+                                        <p className="simple-card-subtitle">{platform.subtitle}</p>
+                                        {platform.handle && <span className="simple-card-handle">{platform.handle}</span>}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        // ChromaGrid for desktop
+                        <ChromaGrid
+                            items={platforms}
+                            radius={300}
+                            damping={0.45}
+                            fadeOut={0.6}
+                            ease="power3.out"
+                        />
+                    )}
                 </div>
             </div>
         </section>
