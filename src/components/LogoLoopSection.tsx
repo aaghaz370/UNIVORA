@@ -14,7 +14,7 @@ import udemyLogo from '../assets/logos/udemy-wordmark-1.svg';
 import courseraLogo from '../assets/logos/coursera.svg';
 import ytMusicLogo from '../assets/logos/youtube-music-1.svg';
 import jiosaavnLogo from '../assets/logos/jiosaavn-logo-1.svg';
-import disneyHotstarLogo from '../assets/logos/Disney+_hotstar_2024.svg';
+import disneyHotstarLogo from '../assets/logos/Disney+_Hotstar_2024.svg';
 
 const platformLogos = [
     { src: netflixLogo, alt: 'Netflix', title: 'Netflix' },
