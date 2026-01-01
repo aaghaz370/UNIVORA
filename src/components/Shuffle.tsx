@@ -127,13 +127,13 @@ const Shuffle: React.FC<ShuffleProps> = ({
         ...style
     };
 
-    const Tag = tag as keyof JSX.IntrinsicElements;
+    const Tag = tag as keyof React.JSX.IntrinsicElements;
 
     return React.createElement(Tag, {
-        ref: ref as any,
+        ref: ref,
         className: `shuffle-text ${className}`.trim(),
         style: commonStyle
-    });
+    } as React.HTMLAttributes<HTMLElement>);
 };
 
 export default Shuffle;
