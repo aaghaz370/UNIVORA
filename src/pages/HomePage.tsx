@@ -2,7 +2,7 @@ import React from 'react';
 import Navigation from '../components/Navigation';
 import HeroBanner from '../components/HeroBanner';
 import EcosystemSection from '../components/EcosystemSection';
-import LogoLoopSection from '../components/LogoLoopSection';
+// import LogoLoopSection from '../components/LogoLoopSection';
 import FeatureHighlights from '../components/FeatureHighlights';
 import JourneySection from '../components/JourneySection';
 import FutureVisionSection from '../components/FutureVisionSection';
@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
             <div id="ecosystem">
                 <EcosystemSection />
             </div>
-            <LogoLoopSection />
+            {/* <LogoLoopSection /> */}
             <FeatureHighlights />
             <div id="journey">
                 <JourneySection />
