@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LogoLoop from './LogoLoop';
 import './LogoLoopSection.css';
 
@@ -32,6 +32,17 @@ const platformLogos = [
 ];
 
 const LogoLoopSection: React.FC = () => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     return (
         <section className="logoloop-section">
             <div className="logoloop-container">
@@ -41,18 +52,46 @@ const LogoLoopSection: React.FC = () => {
             </div>
 
             <div className="logoloop-wrapper">
-                <LogoLoop
-                    logos={platformLogos}
-                    speed={80}
-                    direction="left"
-                    logoHeight={35}
-                    gap={80}
-                    hoverSpeed={20}
-                    scaleOnHover
-                    fadeOut
-                    fadeOutColor="#060010"
-                    ariaLabel="Platform logos"
-                />
+                {isMobile ? (
+                    // Simple CSS-only animation for mobile
+                    <div className="logoloop-mobile">
+                        <div className="logoloop-mobile-track">
+                            {platformLogos.map((logo, index) => (
+                                <img
+                                    key={index}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    title={logo.title}
+                                    className="logoloop-mobile-logo"
+                                />
+                            ))}
+                            {/* Duplicate for seamless loop */}
+                            {platformLogos.map((logo, index) => (
+                                <img
+                                    key={`dup-${index}`}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    title={logo.title}
+                                    className="logoloop-mobile-logo"
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    // Full LogoLoop for desktop
+                    <LogoLoop
+                        logos={platformLogos}
+                        speed={80}
+                        direction="left"
+                        logoHeight={35}
+                        gap={80}
+                        hoverSpeed={20}
+                        scaleOnHover
+                        fadeOut
+                        fadeOutColor="#060010"
+                        ariaLabel="Platform logos"
+                    />
+                )}
             </div>
         </section>
     );

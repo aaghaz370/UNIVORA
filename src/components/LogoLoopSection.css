@@ -52,6 +52,37 @@
     transform: scale(1.1);
 }
 
+/* Mobile CSS-only Animation */
+.logoloop-mobile {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.logoloop-mobile-track {
+    display: flex;
+    gap: 60px;
+    animation: logoScroll 30s linear infinite;
+    will-change: transform;
+}
+
+.logoloop-mobile-logo {
+    height: 30px;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+}
+
+@keyframes logoScroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
     .logoloop-section {
@@ -89,6 +120,14 @@
     .logoloop-wrapper {
         height: 70px;
     }
+
+    .logoloop-mobile-track {
+        gap: 50px;
+    }
+
+    .logoloop-mobile-logo {
+        height: 28px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -107,5 +146,13 @@
 
     .logoloop-wrapper {
         height: 60px;
+    }
+
+    .logoloop-mobile-track {
+        gap: 40px;
+    }
+
+    .logoloop-mobile-logo {
+        height: 25px;
     }
 }
