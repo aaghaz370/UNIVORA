@@ -1,4 +1,4 @@
-/* LogoLoop Section - SAME background as EcosystemSection */
+/* LogoLoop Section */
 .logoloop-section {
     padding: 60px 0 80px;
     background: #060010;
@@ -25,18 +25,53 @@
     height: 100px;
     display: flex;
     align-items: center;
+    overflow: hidden;
 }
 
-/* Make all logos WHITE */
-.logoloop-wrapper img {
+/* Pure CSS Marquee */
+.logoloop-marquee {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 80px;
+    width: 100%;
+}
+
+.logoloop-track {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    animation: scroll 30s linear infinite;
+}
+
+.logoloop-item {
+    height: 35px;
+    width: auto;
+    flex-shrink: 0;
     filter: brightness(0) invert(1);
     opacity: 0.85;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.logoloop-wrapper img:hover {
+.logoloop-item:hover {
     opacity: 1;
     transform: scale(1.1);
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - 80px));
+    }
+}
+
+/* Pause animation on hover */
+.logoloop-marquee:hover .logoloop-track {
+    animation-play-state: paused;
 }
 
 /* Responsive Design */
@@ -52,6 +87,28 @@
     .logoloop-wrapper {
         height: 80px;
     }
+
+    .logoloop-marquee {
+        gap: 70px;
+    }
+
+    .logoloop-track {
+        gap: 70px;
+    }
+
+    .logoloop-item {
+        height: 32px;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(calc(-100% - 70px));
+        }
+    }
 }
 
 @media (max-width: 768px) {
@@ -66,6 +123,29 @@
     .logoloop-wrapper {
         height: 70px;
     }
+
+    .logoloop-marquee {
+        gap: 50px;
+    }
+
+    .logoloop-track {
+        gap: 50px;
+        animation-duration: 20s;
+    }
+
+    .logoloop-item {
+        height: 28px;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(calc(-100% - 50px));
+        }
+    }
 }
 
 @media (max-width: 480px) {
@@ -79,5 +159,28 @@
 
     .logoloop-wrapper {
         height: 60px;
+    }
+
+    .logoloop-marquee {
+        gap: 40px;
+    }
+
+    .logoloop-track {
+        gap: 40px;
+        animation-duration: 15s;
+    }
+
+    .logoloop-item {
+        height: 25px;
+    }
+
+    @keyframes scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(calc(-100% - 40px));
+        }
     }
 }
