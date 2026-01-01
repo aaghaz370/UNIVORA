@@ -51,25 +51,39 @@ const useResizeObserver = (
     elements: Array<React.RefObject<Element | null>>,
     dependencies: React.DependencyList
 ) => {
+    const callbackRef = useRef(callback);
+
+    useEffect(() => {
+        callbackRef.current = callback;
+    }, [callback]);
+
     useEffect(() => {
         if (!window.ResizeObserver) {
-            const handleResize = () => callback();
+            const handleResize = () => callbackRef.current();
             window.addEventListener('resize', handleResize);
-            callback();
+            callbackRef.current();
             return () => window.removeEventListener('resize', handleResize);
         }
 
-        const observers = elements.map(ref => {
-            if (!ref.current) return null;
-            const observer = new ResizeObserver(callback);
-            observer.observe(ref.current);
-            return observer;
+        const observer = new ResizeObserver(() => {
+            window.requestAnimationFrame(() => {
+                callbackRef.current();
+            });
         });
 
-        callback();
+        elements.forEach(ref => {
+            if (ref.current) {
+                observer.observe(ref.current);
+            }
+        });
+
+        // Initial measurement
+        window.requestAnimationFrame(() => {
+            callbackRef.current();
+        });
 
         return () => {
-            observers.forEach(observer => observer?.disconnect());
+            observer.disconnect();
         };
     }, dependencies);
 };
@@ -79,11 +93,13 @@ const useImageLoader = (
     onLoad: () => void,
     dependencies: React.DependencyList
 ) => {
+    const onLoadRef = useRef(onLoad);
+    useEffect(() => { onLoadRef.current = onLoad; }, [onLoad]);
+
     useEffect(() => {
         const images = seqRef.current?.querySelectorAll('img') ?? [];
 
         if (images.length === 0) {
-            onLoad();
             return;
         }
 
@@ -91,7 +107,7 @@ const useImageLoader = (
         const handleImageLoad = () => {
             remainingImages -= 1;
             if (remainingImages === 0) {
-                onLoad();
+                onLoadRef.current();
             }
         };
 
@@ -134,13 +150,10 @@ const useAnimationLoop = (
 
         const seqSize = isVertical ? seqHeight : seqWidth;
 
-        if (seqSize > 0) {
-            offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
-            const transformValue = isVertical
-                ? `translate3d(0, ${-offsetRef.current}px, 0)`
-                : `translate3d(${-offsetRef.current}px, 0, 0)`;
-            track.style.transform = transformValue;
-        }
+        // Reset if size is 0 to avoid NaNs
+        if (seqSize === 0) return;
+
+        offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
 
         const animate = (timestamp: number) => {
             if (lastTimestampRef.current === null) {
@@ -230,27 +243,35 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         }, [speed, direction, isVertical]);
 
         const updateDimensions = useCallback(() => {
-            const containerWidth = containerRef.current?.clientWidth ?? 0;
-            const sequenceRect = seqRef.current?.getBoundingClientRect?.();
-            const sequenceWidth = sequenceRect?.width ?? 0;
-            const sequenceHeight = sequenceRect?.height ?? 0;
+            if (!containerRef.current || !seqRef.current) return;
+
+            const containerWidth = containerRef.current.clientWidth;
+            const sequenceRect = seqRef.current.getBoundingClientRect();
+            const sequenceWidth = sequenceRect.width;
+            const sequenceHeight = sequenceRect.height;
+
             if (isVertical) {
-                const parentHeight = containerRef.current?.parentElement?.clientHeight ?? 0;
-                if (containerRef.current && parentHeight > 0) {
+                const parentHeight = containerRef.current.parentElement?.clientHeight ?? 0;
+                if (parentHeight > 0) {
                     const targetHeight = Math.ceil(parentHeight);
-                    if (containerRef.current.style.height !== `${targetHeight}px`)
+                    // Avoid triggering style recalculation if not needed
+                    if (Math.abs(parseFloat(containerRef.current.style.height || '0') - targetHeight) > 1) {
                         containerRef.current.style.height = `${targetHeight}px`;
+                    }
                 }
                 if (sequenceHeight > 0) {
-                    setSeqHeight(Math.ceil(sequenceHeight));
-                    const viewport = containerRef.current?.clientHeight ?? parentHeight ?? sequenceHeight;
+                    setSeqHeight(prev => (prev !== Math.ceil(sequenceHeight) ? Math.ceil(sequenceHeight) : prev));
+                    const viewport = containerRef.current.clientHeight || parentHeight || sequenceHeight;
                     const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
-                    setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+                    setCopyCount(prev => Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
                 }
-            } else if (sequenceWidth > 0) {
-                setSeqWidth(Math.ceil(sequenceWidth));
-                const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
-                setCopyCount(Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+            } else {
+                // Horizontal
+                if (sequenceWidth > 0) {
+                    setSeqWidth(prev => (prev !== Math.ceil(sequenceWidth) ? Math.ceil(sequenceWidth) : prev));
+                    const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
+                    setCopyCount(prev => Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded));
+                }
             }
         }, [isVertical]);
 
